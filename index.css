@@ -1,0 +1,9 @@
+
+#drawing-canvas {
+    display: flex;
+    border-radius: 15px;
+    border-style: solid;
+    border-width: 2px;
+    border-color: rgb(20, 20, 20);
+    box-shadow: 4px 8px 24px rgba(0, 0, 0, 0.2);
+}
