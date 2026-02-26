@@ -1,9 +1,33 @@
+.toolbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 90px;
+    width: 1920px;
+    background-color: rgb(20, 20, 20);
+}
+
+.controls {
+    display: inline-flex;
+    border-radius: 15px;
+    border-style: solid;
+    border-width: 2px;
+    border-color: rgb(20, 20, 20);
+    box-shadow: 4px 8px 24px rgba(0, 0, 0, 0.2);
+    width:  80px;
+    height: 40px;
+}
 
 #drawing-canvas {
-    display: flex;
+    display: block;
+    position: fixed;
+    margin: 0;
+    left: 550px;
+    top: 208px;
     border-radius: 15px;
     border-style: solid;
     border-width: 2px;
     border-color: rgb(20, 20, 20);
     box-shadow: 4px 8px 24px rgba(0, 0, 0, 0.2);
 }
+
