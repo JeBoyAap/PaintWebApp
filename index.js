@@ -2,21 +2,19 @@ const canvas = document.getElementById("drawing-canvas")
 const context = canvas.getContext("2d")
 const canvas_height = 700
 const canvas_width = 1250
-const canvas_background_color = "rgb(240, 240, 240)"
+const canvas_background_color = "#f0f0f0" //keep in hex
 
 //control panel inputs
 const clearButton = document.getElementById("clear-canvas-button")
 const colorInput = document.getElementById("color-input")
 const penSizeInput = document.getElementById("pen-size-input")
+const eraserButton = document.getElementById("eraser-button")
 
-//TEMP save / restore for testing
 const undoButton = document.getElementById("undo-button")
 const redoButton = document.getElementById("redo-button")
 
 
 let isDrawing = false;
-
-let mouseStartPosition = [null, null]
 
 function initCanvas() {
     canvas.height = canvas_height;
@@ -34,6 +32,8 @@ function draw(e) {
 }
 
 function clearCanvas() {
+    saveSnapshot()
+    setStrokeColor()
     context.clearRect(0, 0, canvas.width, canvas.height)
 }
 
@@ -47,15 +47,17 @@ function setPenSize() {
     context.lineWidth = penSizeInput.value
 }
 
+function setEraser() {
+    context.strokeStyle = canvas_background_color
+}
 
 //undo redo fuctionality
-
 let undoStack = []
 let redoStack = []
 
 function saveSnapshot() {
-    canvasRestorePoint = context.getImageData(0, 0, canvas.width, canvas.height)
-    undoStack.push(canvasRestorePoint)
+    if (undoStack.length > 100) undoStack.shift()
+    undoStack.push(context.getImageData(0, 0, canvas.width, canvas.height))
     redoStack.length = 0
 }
 
@@ -74,13 +76,6 @@ function redo() {
 }
 
 
-
-
-
-
-
-
-
 //Event listeners
 
 //Mouse events
@@ -91,13 +86,14 @@ canvas.addEventListener("mousedown", (e) => {
     context.moveTo(e.offsetX, e.offsetY)
 });
 canvas.addEventListener("mouseup", () => isDrawing = false);
-canvas.addEventListener("mouseleave", () => isDrawing = false);
+//canvas.addEventListener("mouseleave", () => isDrawing = false);
 canvas.addEventListener("mousemove", draw);
 
 //Controlpanel interactions
 clearButton.addEventListener("click", clearCanvas)
 colorInput.addEventListener("input", setStrokeColor)
 penSizeInput.addEventListener("input", setPenSize)
+eraserButton.addEventListener("click", setEraser)
 
 undoButton.addEventListener("click", undo)
 redoButton.addEventListener("click", redo)
