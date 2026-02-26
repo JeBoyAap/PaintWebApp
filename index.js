@@ -86,7 +86,7 @@ canvas.addEventListener("mousedown", (e) => {
     context.moveTo(e.offsetX, e.offsetY)
 });
 canvas.addEventListener("mouseup", () => isDrawing = false);
-//canvas.addEventListener("mouseleave", () => isDrawing = false);
+canvas.addEventListener("mouseleave", () => isDrawing = false);
 canvas.addEventListener("mousemove", draw);
 
 //Controlpanel interactions
@@ -103,4 +103,6 @@ document.addEventListener("keydown", (e) => {
 });
 
 
-initCanvas();
+initCanvas()
+setPenSize()
+setStrokeColor()
