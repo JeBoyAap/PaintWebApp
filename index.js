@@ -44,6 +44,10 @@ function setStrokeColor() {
     context.fillStyle = colorInput.value
 }
 
+function setPencil () {
+    pencilMode = true
+    setStrokeColor()
+}
 function setPenSize() {
     context.beginPath()
     context.lineWidth = penSizeInput.value
@@ -102,7 +106,7 @@ canvas.addEventListener("mousemove", (e) => {
 //Controlpanel interactions
 clearButton.addEventListener("click", clearCanvas)
 colorInput.addEventListener("input", setStrokeColor)
-pencileButton.addEventListener("click", () => pencilMode = true)
+pencileButton.addEventListener("click", setPencil)
 penSizeInput.addEventListener("input", setPenSize)
 eraserButton.addEventListener("click", setEraser);
 undoButton.addEventListener("click", undo)
