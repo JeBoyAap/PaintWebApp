@@ -7,6 +7,7 @@ const canvas_background_color = "#f0f0f0" //keep in hex
 //control panel inputs
 const clearButton = document.getElementById("clear-canvas-button")
 const colorInput = document.getElementById("color-input")
+const pencileButton = document.getElementById("pencil-button")
 const penSizeInput = document.getElementById("pen-size-input")
 const eraserButton = document.getElementById("eraser-button")
 
@@ -15,6 +16,7 @@ const redoButton = document.getElementById("redo-button")
 
 
 let isDrawing = false;
+let pencilMode = true
 
 function initCanvas() {
     canvas.height = canvas_height;
@@ -48,6 +50,7 @@ function setPenSize() {
 }
 
 function setEraser() {
+    pencilMode = false
     context.strokeStyle = canvas_background_color
 }
 
@@ -87,7 +90,7 @@ canvas.addEventListener("mousedown", (e) => {
     saveSnapshot()
     context.beginPath()
     context.moveTo(e.offsetX, e.offsetY)
-    fillAfterTimeout = setTimeout(() => context.fillRect(mousePosition[0] - 1/2 * penSizeInput.value, mousePosition[1] - 1/2 * penSizeInput.value, penSizeInput.value, penSizeInput.value), 200) //.2 seconds
+    if (pencilMode == true) fillAfterTimeout = setTimeout(() => context.fillRect(mousePosition[0] - 1/2 * penSizeInput.value, mousePosition[1] - 1/2 * penSizeInput.value, penSizeInput.value, penSizeInput.value), 200) //.2 seconds
 });
 canvas.addEventListener("mouseup", () => isDrawing = false);
 canvas.addEventListener("mouseleave", () => isDrawing = false);
@@ -99,9 +102,9 @@ canvas.addEventListener("mousemove", (e) => {
 //Controlpanel interactions
 clearButton.addEventListener("click", clearCanvas)
 colorInput.addEventListener("input", setStrokeColor)
+pencileButton.addEventListener("click", () => pencilMode = true)
 penSizeInput.addEventListener("input", setPenSize)
-eraserButton.addEventListener("click", setEraser)
-
+eraserButton.addEventListener("click", setEraser);
 undoButton.addEventListener("click", undo)
 redoButton.addEventListener("click", redo)
 document.addEventListener("keydown", (e) => {
