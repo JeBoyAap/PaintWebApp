@@ -21,8 +21,19 @@
     border-width: 2px;
     border-color: rgb(20, 20, 20);
     box-shadow: 4px 8px 24px rgba(0, 0, 0, 0.2);
-
 }
+
+.controls:hover {
+    cursor: pointer;
+    opacity: 0.95;
+}
+
+.controls:active {
+    cursor: pointer;
+    opacity: 1;
+    scale: 1.05;
+}
+
 
 #drawing-canvas {
     touch-action: none;

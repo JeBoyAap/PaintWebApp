@@ -12,6 +12,8 @@ const eraserButton = document.getElementById("eraser-button")
 const undoButton = document.getElementById("undo-button")
 const redoButton = document.getElementById("redo-button")
 
+const downloadButton = document.getElementById("download-button")
+
 
 let isDrawing = false;
 let pencilMode = true
@@ -85,6 +87,13 @@ function redo() {
 }
 
 
+function downloadCanvas() {
+    const link = document.createElement("a")
+    link.download = "drawing.png"
+    link.href = canvas.toDataURL("image/png")
+    link.click()
+}
+
 
 
 //Event listeners
@@ -110,13 +119,16 @@ clearButton.addEventListener("click", clearCanvas)
 colorInput.addEventListener("input", setStrokeColor)
 pencileButton.addEventListener("click", setPencil)
 penSizeInput.addEventListener("input", setPenSize)
-eraserButton.addEventListener("click", setEraser);
+eraserButton.addEventListener("click", setEraser)
+
 undoButton.addEventListener("click", undo)
 redoButton.addEventListener("click", redo)
 document.addEventListener("keydown", (e) => {
     if (e.ctrlKey && e.key === "z") undo();
     if (e.ctrlKey && e.key === "y") redo();
 });
+
+downloadButton.addEventListener("click", downloadCanvas)
 
 //other events
 window.addEventListener('resize', resizeCanvas);
