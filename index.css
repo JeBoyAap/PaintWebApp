@@ -25,13 +25,7 @@
 }
 
 #drawing-canvas {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: fixed;
     margin: 0;
-    left: 17%;
-    top: 18%;
     border-radius: 15px;
     border-style: solid;
     border-width: 2px;
@@ -39,3 +33,13 @@
     box-shadow: 4px 8px 24px rgba(0, 0, 0, 0.2);
 }
 
+.canvas-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top: 90px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
