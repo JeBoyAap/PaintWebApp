@@ -20,13 +20,19 @@ let pencilMode = true
 
 function initCanvas() {
     resizeCanvas()
-    canvas.style.background = canvas_background_color;
+    setBackgroundColor()
+}
+
+function setBackgroundColor () {
+    context.fillStyle = canvas_background_color
+    context.fillRect(0, 0, canvas.width, canvas.height)    
 }
 
 function resizeCanvas() {
     saveSnapshot()
     canvas.width = window.innerWidth * 0.7;
     canvas.height = window.innerHeight * 0.75;
+    setBackgroundColor()
     undo() //loads last snapshot
     setPenSize()
     setStrokeColor()
