@@ -50,6 +50,7 @@ function clearCanvas() {
     saveSnapshot()
     setStrokeColor()
     context.clearRect(0, 0, canvas.width, canvas.height)
+    initCanvas()
 }
 
 function setStrokeColor() {
