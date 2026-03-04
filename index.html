@@ -5,21 +5,25 @@
         <link rel="stylesheet" href="index.css">
     </head>
     <body>
-        
-        <div class="toolbar">
-            <button id="clear-canvas-button" class="controls">Clear Canvas</button>
-            <input type="color" id="color-input" class="controls" autocomplete="off">
-            <button id="pencil-button" class="controls">Pencil</button>
-            <input type="number" id="pen-size-input" class="controls" min="0" max="100" step="1" value="4" autocomplete="off" >
-            <button id="eraser-button" class="controls">Eraser</button>
-            <button id="undo-button" class="controls">Undo</button>
-            <button id="redo-button" class="controls">Redo</button>
-            <button id="download-button" class="controls">Download</button>
+
+        <div class="main-container">
+            <div class="canvas-container">
+                <canvas id="drawing-canvas"></canvas>
+            </div>
+            
+            <div class="toolbar">
+                <button id="clear-canvas-button" class="controls">Clear Canvas</button>
+                <input type="color" id="color-input" class="controls" autocomplete="off">
+                <button id="pencil-button" class="controls">Pencil</button>
+                <input type="number" id="pen-size-input" class="controls" min="0" max="100" step="1" value="4" autocomplete="off" >
+                <button id="eraser-button" class="controls">Eraser</button>
+                <button id="undo-button" class="controls">Undo</button>
+                <button id="redo-button" class="controls">Redo</button>
+                <button id="download-button" class="controls">Download</button>
+            </div>
         </div>
         
-        <div class="canvas-container">
-            <canvas id="drawing-canvas"></canvas>
-        </div>
+        
         
 
     </body>
