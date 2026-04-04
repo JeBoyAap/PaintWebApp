@@ -3,11 +3,18 @@ const context = canvas.getContext("2d")
 const canvas_background_color = "#f0f0f0" //keep in hex
 
 //control panel inputs
+const cursorButton = document.getElementById("cursor-button")
+const pencileButton = document.getElementById("pencil-button")
+const eraserButton = document.getElementById("eraser-button")
+const brushButton = document.getElementById("brush-button")
+const bucketButton = document.getElementById("bucket-button")
+const textButton = document.getElementById("text-button")
+
 const clearButton = document.getElementById("clear-canvas-button")
 const colorInput = document.getElementById("color-input")
-const pencileButton = document.getElementById("pencil-button")
+
 const penSizeInput = document.getElementById("pen-size-input")
-const eraserButton = document.getElementById("eraser-button")
+
 
 const undoButton = document.getElementById("undo-button")
 const redoButton = document.getElementById("redo-button")
@@ -42,7 +49,7 @@ function resizeCanvas() {
 function draw(e) {
     pointerPosition = [e.offsetX, e.offsetY]
 
-    if (!isDrawing) return;
+    if (!isDrawing && (!pencilMode || !eraserMode)) return;
     context.lineTo(pointerPosition[0], pointerPosition[1])
     context.stroke()
 }
@@ -60,20 +67,55 @@ function setStrokeColor() {
     context.fillStyle = colorInput.value
 }
 
-function setPencil () {
-    pencilMode = true
-    setStrokeColor()
-}
-
 function setPenSize() {
     context.beginPath()
     context.lineWidth = penSizeInput.value
 }
 
+
+//Tools
+function setCursor () {
+    pencilMode = false
+    eraserMode = false
+    BucketMode = false
+}
+
+function setPencil () {
+    pencilMode = true
+    eraserMode = false
+    BucketMode = false
+    setPenSize()
+    setStrokeColor()
+}
+
 function setEraser() {
     pencilMode = false
+    eraserMode = true
+    BucketMode = false
+    setPenSize()
     context.strokeStyle = canvas_background_color
 }
+
+function setBrush() {
+    pencilMode = true
+    eraserMode = false
+    BucketMode = false
+    context.lineWidth = 10
+    setStrokeColor()
+}
+
+function setBucket() {          //todo
+    pencilMode = false
+    eraserMode = false
+    BucketMode = true
+}
+
+function setText() {            //todo
+    pencilMode = false
+    eraserMode = false
+    BucketMode = false
+}
+
 
 //undo redo fuctionality
 let undoStack = []
@@ -114,6 +156,7 @@ function downloadCanvas() {
 fillAfterTimeout = null
 pointerStartPosition = [null, null]
 canvas.addEventListener("pointerdown", (e) => {
+    if (!pencilMode && !eraserMode) return;
     isDrawing = true;
     saveSnapshot()
     context.beginPath()
@@ -128,11 +171,19 @@ canvas.addEventListener("pointermove", (e) => {
 });
 
 //Controlpanel interactions
+
+cursorButton.addEventListener("click", setCursor)
+pencileButton.addEventListener("click", setPencil)
+eraserButton.addEventListener("click", setEraser)
+brushButton.addEventListener("click", setBrush)
+bucketButton.addEventListener("click", setBucket)
+textButton.addEventListener("click", setText)
+
+
 clearButton.addEventListener("click", clearCanvas)
 colorInput.addEventListener("input", setStrokeColor)
-pencileButton.addEventListener("click", setPencil)
 penSizeInput.addEventListener("input", setPenSize)
-eraserButton.addEventListener("click", setEraser)
+
 
 undoButton.addEventListener("click", undo)
 redoButton.addEventListener("click", redo)
@@ -146,5 +197,15 @@ downloadButton.addEventListener("click", downloadCanvas)
 //other events
 window.addEventListener('resize', resizeCanvas);
 
+
+//toggle tools
+const toolButtons = document.querySelectorAll('.tools');
+
+toolButtons.forEach(button => {
+    button.addEventListener('click', () => {
+        toolButtons.forEach(btn => btn.classList.remove('active'));
+        button.classList.add('active');
+    });
+});
 
 initCanvas()

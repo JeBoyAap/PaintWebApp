@@ -129,13 +129,6 @@ header {
     transform: scale(1.08);
 }
 
-.tools.active {
-    background-color: #ffd166;
-    border-color: #f0a500;
-    box-shadow: 0 0 0 3px rgba(240, 165, 0, 0.45), 2px 4px 10px rgba(0, 0, 0, 0.15);
-    transform: scale(1.08);
-}
-
 
 .controls {
     width: 80%;

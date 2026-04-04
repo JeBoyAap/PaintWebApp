@@ -5,19 +5,34 @@
         <link rel="stylesheet" href="index.css">
     </head>
     <body>
-        <img src="OnlyPaintLogo.png" class="logo">
+        <header>
+            <img src="images/OnlyPaintLogo.png" class="logo">
+        </header>
+        
         
         <div class="main-container">
-            <div class="canvas-container">
-                <canvas id="drawing-canvas"></canvas>
+            <div class="workspace">
+                <div class="canvas-container">
+                    <canvas id="drawing-canvas"></canvas>
+                </div>
             </div>
             
-            <div class="toolbar">
+            
+            <div class="sidebar">
+                <div class="tools-container">
+                    <button id="cursor-button" class="tools"> <img src="images/Cursor.png" alt=""> </button>
+                    <button id="pencil-button" class="tools"> <img src="images/Pencil.png" alt=""> </button>
+
+                    <button id="eraser-button" class="tools"> <img src="images/Eraser.png" alt=""> </button>
+                    <button id="brush-button" class="tools" > <img  src="images/Brush.png" alt=""> </button>
+
+                    <button id="bucket-button" class="tools"> <img src="images/Bucket.png" alt=""> </button>
+                    <button id="text-button" class="tools"  > <img src="images/Text.png" alt=""> </button>
+                </div>
+
                 <button id="clear-canvas-button" class="controls">Clear Canvas</button>
                 <input type="color" id="color-input" class="controls" autocomplete="off">
-                <button id="pencil-button" class="controls">Pencil</button>
-                <input type="number" id="pen-size-input" class="controls" min="0" max="100" step="1" value="4" autocomplete="off" >
-                <button id="eraser-button" class="controls">Eraser</button>
+                <input type="number" id="pen-size-input" class="controls" min="1" max="100" step="1" value="4" autocomplete="off" >
                 <button id="undo-button" class="controls">Undo</button>
                 <button id="redo-button" class="controls">Redo</button>
                 <button id="download-button" class="controls">Download</button>
